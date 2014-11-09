@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title>Location Based Car Price Comparison Application</title>
+	
+    <!-- CSS File Linked -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Josefin-Slab">
+	
+    <!-- Google Maps and Places API -->
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBS0vwe6zjC_F_DKPUKspowNsm6pUqS_qI"></script>
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+ 
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <!-- Javascript written by me -->
+    <script src="script.js"></script>
+
+</head>
+<body onload="ptr.initialize()">
+
+    <!-- side panel div container -->
+    <div style="position:relative; width:380px; height: 100%; overflow:auto; float:left; padding-left:10px; padding-right:10px;" id="panel">
+        <div class="font-effect-shadow-multiple"><h1>Location Based Car Price Comparison</h1></div>   
+	<div style="border:1px solid #ccc; background:#e5e5e5; padding:10px;">
+	<table>
+        	<tr>
+			<td> 
+				Make 
+			</td>
+			<td>
+				<select name="make" id="make">
+				<option value="Chevrolet">Chevrolet</option>
+			  	<option value="Fiat">Fiat</option>
+				<option value="Force">Force</option>
+				<option value="Maruti">Maruti</option>
+				<option value="Tata">Tata</option>
+				<option value="Toyota">Toyota</option>
+				<option value="Honda">Honda</option>
+				<option value="Hyundai">Hyundai</option>
+				<option value="Mahindra">Mahindra</option>
+				<option value="Mercedes-Benz">Mercedes-Benz</option>
+				<option value="Mitsubishi">Mitsubishi</option>
+				<option value="Nissan">Nissan</option>
+				<option value="Premier">Premier</option>
+				<option value="Renault">Renault</option>
+				<option value="Skoda">Skoda</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			    Model 
+			</td>
+			<td>
+			<select name="model" id="model">
+				<option value="Spark">Spark</option>
+				<option value="Beat">Beat</option>
+				<option value="Cruze">Cruze</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Variant 
+			</td>
+			<td>
+			<select name="variant" id="variant">
+				<option value="Petrol">Petrol</option>
+				<option value="Diesel">Diesel</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				Cities
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<select name="c1" id="c1">
+				<option value="Agartala">Agartala</option>
+				<option value="Ahmedabad">Ahmedabad</option>
+				<option value="Agra">Agra</option>
+				<option value="Akola">Akola</option>
+				<option value="Aligarh">Aligarh</option>
+				<option value="Allahabad">Allahabad</option>
+				<option value="AmbaaCantt">AmbalaCantt</option>
+				<option value="Amravati">Amravati</option>
+				<option value="Amritsar">Amritsar</option>
+				<option value="Anand">Anand</option>
+				<option value="Anantapur">Anantapur</option>
+				<option value="Aurangabad">Aurangabad</option>
+				<option value="Bangalore" selected>Bangalore</option>				
+				<option value="Bathinda">Bathinda</option>
+				<option value="Bareily">Bareily</option>
+				<option value="Bhopal">Bhopal</option>
+				<option value="Bikaner">Bikaner</option>
+				<option value="Chandigarh">Chandigarh</option>
+				<option value="Chennai">Chennai</option>
+				<option value="Combaitore">Combaitore</option>
+				<option value="Dehradun">Dehradun</option>
+				<option value="Delhi">Delhi</option>
+				<option value="Gurgoan">Gurgoan</option>
+				<option value="Gwalior">Gwalior</option>
+				<option value="Hyderabad">Hyderabad</option>
+				<option value="Jaipur">Jaipur</option>
+				<option value="Jammu">Jammu</option>
+				<option value="Kanpur">Kanpur</option>
+				<option value="Kolkata">Kolkata</option>
+				<option value="Lucknow">Lucknow</option>				
+				<option value="Meerut">Meerut</option>
+				<option value="Mumbai">Mumbai</option>				
+				<option value="Noida">Noida</option>
+				<option value="Rohtak">Rohtak</option>
+				<option value="Surat">Surat</option>
+				<option value="Thane">Thane</option>
+				<option value="Varanasi">Varanasi</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<select name="c2" id="c2">
+				<option value="Agartala">Agartala</option>
+				<option value="Ahmedabad">Ahmedabad</option>
+				<option value="Agra">Agra</option>
+				<option value="Akola">Akola</option>
+				<option value="Aligarh">Aligarh</option>
+				<option value="Allahabad">Allahabad</option>
+				<option value="AmbaaCantt">AmbalaCantt</option>
+				<option value="Amravati">Amravati</option>
+				<option value="Amritsar">Amritsar</option>
+				<option value="Anand">Anand</option>
+				<option value="Anantapur">Anantapur</option>
+				<option value="Aurangabad">Aurangabad</option>
+				<option value="Bangalore">Bangalore</option>				
+				<option value="Bathinda">Bathinda</option>
+				<option value="Bareily">Bareily</option>
+				<option value="Bhopal">Bhopal</option>
+				<option value="Bikaner">Bikaner</option>
+				<option value="Chandigarh">Chandigarh</option>
+				<option value="Chennai">Chennai</option>
+				<option value="Combaitore">Combaitore</option>
+				<option value="Dehradun">Dehradun</option>
+				<option value="Delhi">Delhi</option>
+				<option value="Gurgoan">Gurgoan</option>
+				<option value="Gwalior">Gwalior</option>
+				<option value="Hyderabad">Hyderabad</option>
+				<option value="Jaipur">Jaipur</option>
+				<option value="Jammu">Jammu</option>
+				<option value="Kanpur">Kanpur</option>
+				<option value="Kolkata">Kolkata</option>
+				<option value="Lucknow" selected>Lucknow</option>				
+				<option value="Meerut">Meerut</option>
+				<option value="Mumbai">Mumbai</option>				
+				<option value="Noida">Noida</option>
+				<option value="Rohtak">Rohtak</option>
+				<option value="Surat">Surat</option>
+				<option value="Thane">Thane</option>
+				<option value="Varanasi">Varanasi</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<select name="c3" id="c3">
+				<option value="Agartala">Agartala</option>
+				<option value="Ahmedabad">Ahmedabad</option>
+				<option value="Agra">Agra</option>
+				<option value="Akola">Akola</option>
+				<option value="Aligarh">Aligarh</option>
+				<option value="Allahabad">Allahabad</option>
+				<option value="AmbaaCantt">AmbalaCantt</option>
+				<option value="Amravati">Amravati</option>
+				<option value="Amritsar">Amritsar</option>
+				<option value="Anand">Anand</option>
+				<option value="Anantapur">Anantapur</option>
+				<option value="Aurangabad">Aurangabad</option>
+				<option value="Bangalore">Bangalore</option>				
+				<option value="Bathinda">Bathinda</option>
+				<option value="Bareily">Bareily</option>
+				<option value="Bhopal">Bhopal</option>
+				<option value="Bikaner">Bikaner</option>
+				<option value="Chandigarh">Chandigarh</option>
+				<option value="Chennai">Chennai</option>
+				<option value="Combaitore">Combaitore</option>
+				<option value="Dehradun">Dehradun</option>
+				<option value="Delhi" selected>New Delhi</option>
+				<option value="Gurgoan">Gurgoan</option>
+				<option value="Gwalior">Gwalior</option>
+				<option value="Hyderabad">Hyderabad</option>
+				<option value="Jaipur">Jaipur</option>
+				<option value="Jammu">Jammu</option>
+				<option value="Kanpur">Kanpur</option>
+				<option value="Kolkata">Kolkata</option>
+				<option value="Lucknow">Lucknow</option>				
+				<option value="Meerut">Meerut</option>
+				<option value="Mumbai">Mumbai</option>				
+				<option value="Noida">Noida</option>
+				<option value="Rohtak">Rohtak</option>
+				<option value="Surat">Surat</option>
+				<option value="Thane">Thane</option>
+				<option value="Varanasi">Varanasi</option>			
+			
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+			<select name="c4" id="c4">
+				<option value="Agartala">Agartala</option>
+				<option value="Ahmedabad" selected>Ahmedabad</option>
+				<option value="Agra">Agra</option>
+				<option value="Akola">Akola</option>
+				<option value="Aligarh">Aligarh</option>
+				<option value="Allahabad">Allahabad</option>
+				<option value="AmbaaCantt">AmbalaCantt</option>
+				<option value="Amravati">Amravati</option>
+				<option value="Amritsar">Amritsar</option>
+				<option value="Anand">Anand</option>
+				<option value="Anantapur">Anantapur</option>
+				<option value="Aurangabad">Aurangabad</option>
+				<option value="Bangalore">Bangalore</option>				
+				<option value="Bathinda">Bathinda</option>
+				<option value="Bareily">Bareily</option>
+				<option value="Bhopal">Bhopal</option>
+				<option value="Bikaner">Bikaner</option>
+				<option value="Chandigarh">Chandigarh</option>
+				<option value="Chennai">Chennai</option>
+				<option value="Combaitore">Combaitore</option>
+				<option value="Dehradun">Dehradun</option>
+				<option value="Delhi">Delhi</option>
+				<option value="Gurgoan">Gurgoan</option>
+				<option value="Gwalior">Gwalior</option>
+				<option value="Hyderabad">Hyderabad</option>
+				<option value="Jaipur">Jaipur</option>
+				<option value="Jammu">Jammu</option>
+				<option value="Kanpur">Kanpur</option>
+				<option value="Kolkata">Kolkata</option>
+				<option value="Lucknow">Lucknow</option>				
+				<option value="Meerut">Meerut</option>
+				<option value="Mumbai">Mumbai</option>				
+				<option value="Noida">Noida</option>
+				<option value="Rohtak">Rohtak</option>
+				<option value="Surat">Surat</option>
+				<option value="Thane">Thane</option>
+				<option value="Varanasi">Varanasi</option>
+			</select>
+			</td>
+		</tr>
+		<tr>
+			<td><input type="button" value="GO" onClick="ptr.cardata()"></td>
+			<td><input type="button" value="Reset" onClick="location.reload();"></td>		
+		</tr>
+
+</table>
+        </div>
+    </div>
+    <!-- map div container -->
+    <div id="map_canvas" style="height:100%; margin-left:400px;"></div>
+</body>  
+</html>
